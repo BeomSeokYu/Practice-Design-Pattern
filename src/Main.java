@@ -1,8 +1,7 @@
-import abstractfactory.*;
-import factorymethod.LgProduct;
-import factorymethod.Factory;
-import factorymethod.Product;
-import factorymethod.ProductFactory;
+import builder.*;
+import builder.Factory;
+import builder.createcustom.CustomBuilder;
+import builder.createcustom.CustomFactory;
 
 class Main {
     public static void main(String[] args) {
@@ -30,22 +29,35 @@ class Main {
 //        gram.name();
 //        galbook.name();
 
-        /* Abstract Factory */
-        TireProduct tireProduct;
-        DoorProduct doorProduct;
+//        /* Abstract Factory */
+//        TireProduct tireProduct;
+//        DoorProduct doorProduct;
+//
+//        KoreaFactory koreaFactory = new KoreaFactory();
+//        tireProduct = koreaFactory.createTire();
+//        doorProduct = koreaFactory.createDoor();
+//        tireProduct.makeAssemble();
+//        doorProduct.makeAssemble();
+//        System.out.println(tireProduct instanceof KoreaTireProduct);
+//
+//        StateFactory stateFactory = new StateFactory();
+//        tireProduct = stateFactory.createTire();
+//        doorProduct = stateFactory.createDoor();
+//        tireProduct.makeAssemble();
+//        doorProduct.makeAssemble();
+//        System.out.println(tireProduct instanceof StateTireProduct);
 
-        KoreaFactory koreaFactory = new KoreaFactory();
-        tireProduct = koreaFactory.createTire();
-        doorProduct = koreaFactory.createDoor();
-        tireProduct.makeAssemble();
-        doorProduct.makeAssemble();
-        System.out.println(tireProduct instanceof KoreaTireProduct);
-
-        StateFactory stateFactory = new StateFactory();
-        tireProduct = stateFactory.createTire();
-        doorProduct = stateFactory.createDoor();
-        tireProduct.makeAssemble();
-        doorProduct.makeAssemble();
-        System.out.println(tireProduct instanceof StateTireProduct);
+        /* Builder */
+        Builder builder = new Factory(new ProductModel());
+        Computer buildCom = (Computer) builder.defaultBuilder().build();
+        System.out.println(buildCom);
+        System.out.println("================================================================");
+        CustomBuilder customBuilder = new CustomFactory(new ProductModel());
+        Computer customBuildCom = (Computer) customBuilder
+                .setCpu("i9-13900")
+                .setRam(16, 16)
+                .setStorage(256, 512)
+                .build();
+        System.out.println(customBuildCom);
     }
 }
