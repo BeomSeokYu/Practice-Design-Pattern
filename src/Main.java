@@ -11,6 +11,8 @@ import creational.factorymethod.Product;
 import creational.factorymethod.ProductFactory;
 import creational.prototype.Prototype;
 import creational.singleton.Env;
+import structural.adapter.Adapter;
+import structural.adapter.Objects;
 
 class Main {
     public static void main(String[] args) {
@@ -20,6 +22,8 @@ class Main {
 //        Creational.abstractFactory();
 //        Creational.builder();
 //        Creational.prototype();
+
+        Structural.adapter();
     }
 
 
@@ -106,7 +110,11 @@ class Main {
      * STRUCTURAL PATTERN
      ****************************************************************/
     static class Structural {
-
+        public static void adapter() {
+            Adapter obj = new Objects();
+            System.out.println(obj.twiceOf(5));
+            System.out.println(obj.halfOf(4));
+        }
     }
 
     /****************************************************************
