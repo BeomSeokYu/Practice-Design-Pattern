@@ -19,6 +19,13 @@ import structural.bridge.patterndesign1.Language;
 import structural.bridge.oldcode.Greeting;
 import structural.bridge.oldcode.Hello2;
 import structural.bridge.patterndesign2.Message;
+import structural.composite.ex1.Component;
+import structural.composite.ex1.Composite;
+import structural.composite.ex1.Leaf;
+import structural.composite.expansion.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 class Main {
     public static void main(String[] args) {
@@ -30,7 +37,8 @@ class Main {
 //        Creational.prototype();
 
 //        Structural.adapter();
-        Structural.bridge();
+//        Structural.bridge();
+        Structural.composite();
     }
 
 
@@ -140,6 +148,60 @@ class Main {
             structural.bridge.patterndesign2.Language english = new Message(new structural.bridge.patterndesign2.English());
             System.out.println(korean.greeting());
             System.out.println(english.greeting());
+        }
+
+        public static void composite() {
+            // expansion
+            structural.composite.expansion.Computer computer = new structural.composite.expansion.Computer();
+            computer.setMonitor(new Monitor());
+            computer.monitor.addMonitor(new Monitor32());
+            computer.monitor.addMonitor(new Monitor24());
+            computer.setDisk(new Disk());
+            computer.setMemory(new Memory());
+
+            System.out.println(computer.name);
+            System.out.println(computer.monitor.name);
+            System.out.println(computer.disk.name);
+            System.out.println(computer.memory.name);
+            computer.monitor.show();
+
+            // ex1
+            Composite root = new Composite("root");
+            Composite home = new Composite("home");
+            Composite users = new Composite("users");
+            Composite imgs = new Composite("imgs");
+
+            Leaf imgFile1 = new Leaf("img1");
+            Leaf imgFile2 = new Leaf("img2");
+            Leaf imgFile3 = new Leaf("img3");
+            Leaf imgFile4 = new Leaf("img4");
+
+            root.addNode(home);
+            root.addNode(users);
+            users.addNode(imgs);
+            imgs.addNode(imgFile1);
+            imgs.addNode(imgFile2);
+            imgs.addNode(imgFile3);
+            imgs.addNode(imgFile4);
+            imgs.removeNode(imgFile2);
+            System.out.println(imgs.children.get(imgFile1.getData()));
+            _compositeTreeSearch(root);
+        }
+
+        private static void _compositeTreeSearch(Component component) {
+            if (component instanceof Composite && ((Composite) component).isNode()) {
+                System.out.println("Folder : " + component.getName());
+                Map<String, Component> children = ((Composite) component).children;
+                for (String key : children.keySet()) {
+                    _compositeTreeSearch(children.get(key));
+                }
+            } else if (component instanceof Composite) {
+                System.out.println("Folder : " + component.getName());
+            } else if (component instanceof Leaf) {
+                System.out.println("File : " + ((Leaf) component).getData());
+            } else {
+                System.out.println("??");
+            }
         }
     }
 
