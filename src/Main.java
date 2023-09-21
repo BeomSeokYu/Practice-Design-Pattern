@@ -23,6 +23,9 @@ import structural.composite.ex1.Component;
 import structural.composite.ex1.Composite;
 import structural.composite.ex1.Leaf;
 import structural.composite.expansion.*;
+import structural.decorator.I7;
+import structural.decorator.Product1;
+import structural.decorator.Ssd256;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -38,7 +41,8 @@ class Main {
 
 //        Structural.adapter();
 //        Structural.bridge();
-        Structural.composite();
+//        Structural.composite();
+        Structural.decorator();
     }
 
 
@@ -202,6 +206,14 @@ class Main {
             } else {
                 System.out.println("??");
             }
+        }
+
+        public static void decorator() {
+            structural.decorator.Component product = new Product1(); // 원피스
+            structural.decorator.Component spec = new I7(product); // base : 원피스
+            spec = new Ssd256(spec); // base : I7
+            System.out.println(spec.product());
+            System.out.println(spec.price());
         }
     }
 
