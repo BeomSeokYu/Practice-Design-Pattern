@@ -13,11 +13,11 @@ import creational.prototype.Prototype;
 import creational.singleton.Env;
 import structural.adapter.Adapter;
 import structural.adapter.Objects;
+import structural.bridge.oldcode.Greeting;
+import structural.bridge.oldcode.Hello2;
 import structural.bridge.patterndesign1.English;
 import structural.bridge.patterndesign1.Korean;
 import structural.bridge.patterndesign1.Language;
-import structural.bridge.oldcode.Greeting;
-import structural.bridge.oldcode.Hello2;
 import structural.bridge.patterndesign2.Message;
 import structural.composite.ex1.Component;
 import structural.composite.ex1.Composite;
@@ -26,8 +26,8 @@ import structural.composite.expansion.*;
 import structural.decorator.I7;
 import structural.decorator.Product1;
 import structural.decorator.Ssd256;
+import structural.facade.Facade;
 
-import java.util.Arrays;
 import java.util.Map;
 
 class Main {
@@ -42,7 +42,8 @@ class Main {
 //        Structural.adapter();
 //        Structural.bridge();
 //        Structural.composite();
-        Structural.decorator();
+//        Structural.decorator();
+        Structural.facade();
     }
 
 
@@ -215,12 +216,16 @@ class Main {
             System.out.println(spec.product());
             System.out.println(spec.price());
         }
+
+        public static void facade() {
+            Facade facade = new Facade();
+            facade.processAll();
+        }
     }
 
     /****************************************************************
      * BEHAVIORAL PATTERN
      ****************************************************************/
     static class Behavioral {
-
     }
 }
